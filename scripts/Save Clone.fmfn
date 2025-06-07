@@ -1,0 +1,14 @@
+# Save Clone in file script-commit
+
+Set Variable [ $path ; Value: Get ( DocumentsPath ) & Main::Clone path ]
+Set Error Capture [ On ]
+Delete File [ Target file: “$path” ]
+Save a Copy as [ “$path” ; clone (no records) ; Create folders: On ]
+# 
+// # © 2025 Dean Ayalon <dev@deanayalon.com>
+Licensed under the Apache License, Version 2.0
+You may use, modify, and distribute this file under the terms of that license.
+Please retain this notice and give appropriate credit.
+
+Source: https://github.com/deanayalon/fm-script-commit
+Contact me at the above email for any questions or support.
