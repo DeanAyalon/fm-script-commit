@@ -1,0 +1,30 @@
+# Copy script in file script-commit_new
+
+// # In order for paste to work, the Main::clipboard field needs to be present on the layout, it can be placed out of bounds
+# 
+Set Variable [ $r ; Value: MBS("ScriptWorkspace.CopyScriptText") ]
+New Window [ Style: Document ; Name: "clipboard" ; Using layout: “Main” ]
+Show All Records
+Paste [ Select ; Main::clipboard ]
+Set Variable [ $scriptText ; Value: Main::clipboard ]
+Set Field [ Main::clipboard ; "" ]
+Close Window [ Current Window ]
+Show Custom Dialog [ $scriptText ]
+Exit Script [ Text Result: $scriptText ]
+# 
+// # Works with indents, unlike ScriptWorkspace.ScriptText
+// If [ 0 ]
+	// Loop [ Flush: Always ]
+		// Loop [ Flush: Always ]
+			// Exit Loop If [ 1 ]
+		// End Loop
+	// End Loop
+// End If
+# 
+// # © 2025 Dean Ayalon <dev@deanayalon.com>
+Licensed under the Apache License, Version 2.0
+You may use, modify, and distribute this file under the terms of that license.
+Please retain this notice and give appropriate credit.
+
+Source: https://github.com/deanayalon/fm-script-commit
+Contact me at the above email for any questions or support.

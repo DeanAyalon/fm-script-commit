@@ -1,0 +1,35 @@
+# Iterate scripts in file script-commit_new
+
+# Queries a list of all script paths and iterates them by name
+# ! Will NOT work if two scripts share a name
+# 
+# ! NOTICE
+// # There still seems to be no way of knowing what script you're on, especially if two scripts share a name
+# 
+# ! MBS(ScriptWorkspace.OpenScript) returns OK even if fails
+// # When trying to open a directory
+# Thus:
+# ! There is currently no easy way of knowing whether a line returned by ScriptWorkspace.ScriptPaths is a script or a directory
+// # Open -> Compare tab name with $scriptName
+// # Check if next line has the previous line as prefix
+# 
+Open Script Workspace
+Set Variable [ $scripts ; Value: MBS("ScriptWorkspace.ScriptPaths") ]
+Show Custom Dialog [ "Scripts" ; $scripts ]
+Loop [ Flush: Always ]
+	Exit Loop If [ IsEmpty ( $scripts ) ]
+	Set Variable [ $script ; Value: GetValue ( $scripts ; 1 ) ]
+	Set Variable [ $scripts ; Value: RightValues ( $scripts ; ValueCount ( $scripts ) - 1 ) ]
+	Set Variable [ $scriptName ; Value: Let ( segments = Substitute ( $script ; "	" ; ¶ ) ; GetValue ( segments ; ValueCount ( segments ) ) ) ]
+	Set Variable [ $r ; Value: MBS("ScriptWorkspace.OpenScript" ; $scriptName) ]
+	Show Custom Dialog [ "open " & $scriptname ; $r ]
+	Perform Script [ Specified: From list ; “Copy script” ; Parameter:    ]
+End Loop
+# 
+// # © 2025 Dean Ayalon <dev@deanayalon.com>
+Licensed under the Apache License, Version 2.0
+You may use, modify, and distribute this file under the terms of that license.
+Please retain this notice and give appropriate credit.
+
+Source: https://github.com/deanayalon/fm-script-commit
+Contact me at the above email for any questions or support.
