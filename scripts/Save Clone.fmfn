@@ -1,9 +1,10 @@
 # Save Clone in file script-commit
 
-Set Variable [ $path ; Value: Get ( DocumentsPath ) & Main::Clone path ]
+Set Variable [ $path ; Value: ConvertToFileMakerPath ( Main::Project path ; Abs ( Get ( SystemPlatform ) ) ) & "/" & Main::Clone path //                                            1: MacOS, 2: Windows ]
 Set Error Capture [ On ]
 Delete File [ Target file: “$path” ]
 Save a Copy as [ “$path” ; clone (no records) ; Create folders: On ]
+Show Custom Dialog [ "Clone Saved" ; Main::Version ]
 # 
 // # © 2025 Dean Ayalon <dev@deanayalon.com>
 Licensed under the Apache License, Version 2.0
