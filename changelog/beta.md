@@ -7,3 +7,5 @@ Commit Script (+XML), Find File, and Hotkeys
 # v0.1.1
 Handle MBS registration for script commit
 
+# v0.2
+Commit multiple scripts at once
