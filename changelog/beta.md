@@ -18,3 +18,6 @@ Export content using `MBS(Text.WriteTextFile)` (UTF-8) instead of native `Export
 
 ## v0.2.3
 Patch tmp directory creation
+
+## v0.2.4
+Fix typo in `MAIN::Script extension`, export script XML within `<fmxmlsnippet>` tags for simpler copy-paste into FileMaker

@@ -1,423 +1,424 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Script includeInMenu="True" SiriShortcutVisible="False" runFullAccess="False" id="2" name="Commit Script">
-  <Step enable="True" id="89" name="# (comment)">
-    <Text>Commit script </Text>
-  </Step>
-  <Step enable="False" id="89" name="# (comment)">
-    <Text>Parameter - Generate XML for the script&#13;If XML file exists, it is updated anyway&#13;&#13;This script requires the developer to copy the committed script from the side menu before running</Text>
-  </Step>
-  <Step enable="True" id="89" name="# (comment)"/>
-  <Step enable="True" id="89" name="# (comment)">
-    <Text>Requires MonkeyBreadSoftware plugin version 10.1+</Text>
-  </Step>
-  <Step enable="True" id="89" name="# (comment)"/>
-  <Step enable="True" id="1" name="Perform Script">
-    <Script id="8" name="MBS Registration"/>
-  </Step>
-  <Step enable="True" id="68" name="If">
-    <Calculation><![CDATA[Get ( ScriptResult ) ≠ 1]]></Calculation>
-  </Step>
-  <Step enable="True" id="103" name="Exit Script"/>
-  <Step enable="True" id="70" name="End If"/>
-  <Step enable="True" id="89" name="# (comment)"/>
-  <Step enable="True" id="89" name="# (comment)">
-    <Text>Get Script from clipboard</Text>
-  </Step>
-  <Step enable="True" id="141" name="Set Variable">
-    <Value>
-      <Calculation><![CDATA[MBS("Clipboard.GetFileMakerData"; "auto")]]></Calculation>
-    </Value>
-    <Repetition>
-      <Calculation><![CDATA[1]]></Calculation>
-    </Repetition>
-    <Name>$fullxml</Name>
-  </Step>
-  <Step enable="True" id="68" name="If">
-    <Calculation><![CDATA[MBS("Clipboard.DetectFileMakerDataType"; $fullxml) ≠ "Script"]]></Calculation>
-  </Step>
-  <Step enable="True" id="87" name="Show Custom Dialog">
-    <Title>
-      <Calculation><![CDATA["Commit Script"]]></Calculation>
-    </Title>
-    <Message>
-      <Calculation><![CDATA["Please copy the scripts from the side menu"]]></Calculation>
-    </Message>
-    <Buttons>
-      <Button CommitState="True">
-        <Calculation><![CDATA["OK"]]></Calculation>
-      </Button>
-      <Button CommitState="False"/>
-      <Button CommitState="False"/>
-    </Buttons>
-  </Step>
-  <Step enable="True" id="88" name="Open Script Workspace"/>
-  <Step enable="True" id="103" name="Exit Script"/>
-  <Step enable="True" id="70" name="End If"/>
-  <Step enable="True" id="89" name="# (comment)"/>
-  <Step enable="True" id="141" name="Set Variable">
-    <Value>
-      <Calculation><![CDATA[MBS("XML.ItemRefs"; $fullxml; "script")]]></Calculation>
-    </Value>
-    <Repetition>
-      <Calculation><![CDATA[1]]></Calculation>
-    </Repetition>
-    <Name>$scriptrefs</Name>
-  </Step>
-  <Step enable="True" id="141" name="Set Variable">
-    <Value>
-      <Calculation><![CDATA[Main::Project path & "/" & Main::Scripts path]]></Calculation>
-    </Value>
-    <Repetition>
-      <Calculation><![CDATA[1]]></Calculation>
-    </Repetition>
-    <Name>$scriptsDir</Name>
-  </Step>
-  <Step enable="True" id="71" name="Loop">
-    <FlushType value="Always"/>
-  </Step>
-  <Step enable="True" id="72" name="Exit Loop If">
-    <Calculation><![CDATA[IsEmpty ( $scriptrefs )]]></Calculation>
-  </Step>
-  <Step enable="True" id="141" name="Set Variable">
-    <Value>
-      <Calculation><![CDATA[MBS("XML.Format"; GetValue ( $scriptrefs ; 1 ))]]></Calculation>
-    </Value>
-    <Repetition>
-      <Calculation><![CDATA[1]]></Calculation>
-    </Repetition>
-    <Name>$xml</Name>
-  </Step>
-  <Step enable="True" id="141" name="Set Variable">
-    <Value>
-      <Calculation><![CDATA[Let ( [
+<fmxmlsnippet type="FMObjectList">
+  <Script includeInMenu="True" SiriShortcutVisible="False" runFullAccess="False" id="2" name="Commit Script">
+    <Step enable="True" id="89" name="# (comment)">
+      <Text>Commit script </Text>
+    </Step>
+    <Step enable="False" id="89" name="# (comment)">
+      <Text>Parameter - Generate XML for the script&#13;If XML file exists, it is updated anyway&#13;&#13;This script requires the developer to copy the committed script from the side menu before running</Text>
+    </Step>
+    <Step enable="True" id="89" name="# (comment)"/>
+    <Step enable="True" id="89" name="# (comment)">
+      <Text>Requires MonkeyBreadSoftware plugin version 10.1+</Text>
+    </Step>
+    <Step enable="True" id="89" name="# (comment)"/>
+    <Step enable="True" id="1" name="Perform Script">
+      <Script id="8" name="MBS Registration"/>
+    </Step>
+    <Step enable="True" id="68" name="If">
+      <Calculation><![CDATA[Get ( ScriptResult ) ≠ 1]]></Calculation>
+    </Step>
+    <Step enable="True" id="103" name="Exit Script"/>
+    <Step enable="True" id="70" name="End If"/>
+    <Step enable="True" id="89" name="# (comment)"/>
+    <Step enable="True" id="89" name="# (comment)">
+      <Text>Get Script from clipboard</Text>
+    </Step>
+    <Step enable="True" id="141" name="Set Variable">
+      <Value>
+        <Calculation><![CDATA[MBS("Clipboard.GetFileMakerData"; "auto")]]></Calculation>
+      </Value>
+      <Repetition>
+        <Calculation><![CDATA[1]]></Calculation>
+      </Repetition>
+      <Name>$fullxml</Name>
+    </Step>
+    <Step enable="True" id="68" name="If">
+      <Calculation><![CDATA[MBS("Clipboard.DetectFileMakerDataType"; $fullxml) ≠ "Script"]]></Calculation>
+    </Step>
+    <Step enable="True" id="87" name="Show Custom Dialog">
+      <Title>
+        <Calculation><![CDATA["Commit Script"]]></Calculation>
+      </Title>
+      <Message>
+        <Calculation><![CDATA["Please copy the scripts from the side menu"]]></Calculation>
+      </Message>
+      <Buttons>
+        <Button CommitState="True">
+          <Calculation><![CDATA["OK"]]></Calculation>
+        </Button>
+        <Button CommitState="False"/>
+        <Button CommitState="False"/>
+      </Buttons>
+    </Step>
+    <Step enable="True" id="88" name="Open Script Workspace"/>
+    <Step enable="True" id="103" name="Exit Script"/>
+    <Step enable="True" id="70" name="End If"/>
+    <Step enable="True" id="89" name="# (comment)"/>
+    <Step enable="True" id="141" name="Set Variable">
+      <Value>
+        <Calculation><![CDATA[MBS("XML.ItemRefs"; $fullxml; "script")]]></Calculation>
+      </Value>
+      <Repetition>
+        <Calculation><![CDATA[1]]></Calculation>
+      </Repetition>
+      <Name>$scriptrefs</Name>
+    </Step>
+    <Step enable="True" id="141" name="Set Variable">
+      <Value>
+        <Calculation><![CDATA[Main::Project path & "/" & Main::Scripts path]]></Calculation>
+      </Value>
+      <Repetition>
+        <Calculation><![CDATA[1]]></Calculation>
+      </Repetition>
+      <Name>$scriptsDir</Name>
+    </Step>
+    <Step enable="True" id="71" name="Loop">
+      <FlushType value="Always"/>
+    </Step>
+    <Step enable="True" id="72" name="Exit Loop If">
+      <Calculation><![CDATA[IsEmpty ( $scriptrefs )]]></Calculation>
+    </Step>
+    <Step enable="True" id="141" name="Set Variable">
+      <Value>
+        <Calculation><![CDATA[MBS("XML.SetPathXML"; "<fmxmlsnippet type=\"FMObjectList\"/>"; "fmxmlsnippet¶script"; 4; 
+  GetValue ( $scriptrefs ; 1 )
+)]]></Calculation>
+      </Value>
+      <Repetition>
+        <Calculation><![CDATA[1]]></Calculation>
+      </Repetition>
+      <Name>$xml</Name>
+    </Step>
+    <Step enable="True" id="141" name="Set Variable">
+      <Value>
+        <Calculation><![CDATA[Let ( [
   start = Position ( $xml ; "name=\"" ; 1 ; 1 ) + 6 ;
   end = Position ( $xml ; "\"" ; start ; 1 )
 ] ;
   Middle ( $xml ; start ; end - start )
 )]]></Calculation>
-    </Value>
-    <Repetition>
-      <Calculation><![CDATA[1]]></Calculation>
-    </Repetition>
-    <Name>$script</Name>
-  </Step>
-  <Step enable="True" id="141" name="Set Variable">
-    <Value>
-      <Calculation><![CDATA[$scripts & $script & ¶]]></Calculation>
-    </Value>
-    <Repetition>
-      <Calculation><![CDATA[1]]></Calculation>
-    </Repetition>
-    <Name>$scripts</Name>
-  </Step>
-  <Step enable="True" id="141" name="Set Variable">
-    <Value>
-      <Calculation><![CDATA[RightValues ( $scriptrefs ; ValueCount ( $scriptrefs ) - 1 )]]></Calculation>
-    </Value>
-    <Repetition>
-      <Calculation><![CDATA[1]]></Calculation>
-    </Repetition>
-    <Name>$scriptrefs</Name>
-  </Step>
-  <Step enable="True" id="89" name="# (comment)"/>
-  <Step enable="True" id="89" name="# (comment)">
-    <Text>Commit Script Text</Text>
-  </Step>
-  <Step enable="True" id="141" name="Set Variable">
-    <Value>
-      <Calculation><![CDATA[$script & "." & Main::Script extention]]></Calculation>
-    </Value>
-    <Repetition>
-      <Calculation><![CDATA[1]]></Calculation>
-    </Repetition>
-    <Name>$filename</Name>
-  </Step>
-  <Step index="2" Source="MBSP" enable="True" id="186" name="MBS">
-    <PluginStep>
-      <Parameter ShowInLine="true" Label="Destination" Type="target"/>
-      <Parameter ID="0" Label="Function" ShowInline="true" DataType="text" Type="calc"/>
-      <Parameter ID="1" Label="P1" ShowInline="true" DataType="text" Type="calc"/>
-      <Parameter ID="2" Label="P2" ShowInline="true" DataType="text" Type="calc"/>
-      <Parameter ID="3" Label="P3" ShowInline="true" DataType="text" Type="calc"/>
-      <Parameter ID="4" Label="P4" ShowInline="true" DataType="text" Type="calc"/>
-      <Parameter ID="5" Label="P5" ShowInline="false" DataType="text" Type="calc"/>
-      <Parameter ID="6" Label="P6" ShowInline="false" DataType="text" Type="calc"/>
-      <Parameter ID="7" Label="P7" ShowInline="false" DataType="text" Type="calc"/>
-      <Parameter ID="8" Label="P8" ShowInline="false" DataType="text" Type="calc"/>
-      <Parameter ID="9" Label="P9" ShowInline="false" DataType="text" Type="calc"/>
-    </PluginStep>
-    <SelectAll state="True"/>
-    <Field/>
-    <ParameterValues>
-      <Object index="0" type="Calc">
-        <Calculation><![CDATA["ScriptWorkspace.OpenScript"]]></Calculation>
-      </Object>
-      <Object index="1" type="Calc">
-        <Calculation><![CDATA[$script]]></Calculation>
-      </Object>
-      <Object index="2" type="Calc">
-        <Calculation><![CDATA[]]></Calculation>
-      </Object>
-      <Object index="3" type="Calc">
-        <Calculation><![CDATA[]]></Calculation>
-      </Object>
-      <Object index="4" type="Calc">
-        <Calculation><![CDATA[]]></Calculation>
-      </Object>
-      <Object index="5" type="Calc">
-        <Calculation><![CDATA[]]></Calculation>
-      </Object>
-      <Object index="6" type="Calc">
-        <Calculation><![CDATA[]]></Calculation>
-      </Object>
-      <Object index="7" type="Calc">
-        <Calculation><![CDATA[]]></Calculation>
-      </Object>
-      <Object index="8" type="Calc">
-        <Calculation><![CDATA[]]></Calculation>
-      </Object>
-      <Object index="9" type="Calc">
-        <Calculation><![CDATA[]]></Calculation>
-      </Object>
-    </ParameterValues>
-  </Step>
-  <Step index="2" Source="MBSP" enable="True" id="186" name="MBS">
-    <PluginStep>
-      <Parameter ShowInLine="true" Label="Destination" Type="target"/>
-      <Parameter ID="0" Label="Function" ShowInline="true" DataType="text" Type="calc"/>
-      <Parameter ID="1" Label="P1" ShowInline="true" DataType="text" Type="calc"/>
-      <Parameter ID="2" Label="P2" ShowInline="true" DataType="text" Type="calc"/>
-      <Parameter ID="3" Label="P3" ShowInline="true" DataType="text" Type="calc"/>
-      <Parameter ID="4" Label="P4" ShowInline="true" DataType="text" Type="calc"/>
-      <Parameter ID="5" Label="P5" ShowInline="false" DataType="text" Type="calc"/>
-      <Parameter ID="6" Label="P6" ShowInline="false" DataType="text" Type="calc"/>
-      <Parameter ID="7" Label="P7" ShowInline="false" DataType="text" Type="calc"/>
-      <Parameter ID="8" Label="P8" ShowInline="false" DataType="text" Type="calc"/>
-      <Parameter ID="9" Label="P9" ShowInline="false" DataType="text" Type="calc"/>
-    </PluginStep>
-    <SelectAll state="True"/>
-    <Field/>
-    <ParameterValues>
-      <Object index="0" type="Calc">
-        <Calculation><![CDATA["ScriptWorkspace.CopyScriptText"]]></Calculation>
-      </Object>
-      <Object index="1" type="Calc">
-        <Calculation><![CDATA[]]></Calculation>
-      </Object>
-      <Object index="2" type="Calc">
-        <Calculation><![CDATA[]]></Calculation>
-      </Object>
-      <Object index="3" type="Calc">
-        <Calculation><![CDATA[]]></Calculation>
-      </Object>
-      <Object index="4" type="Calc">
-        <Calculation><![CDATA[]]></Calculation>
-      </Object>
-      <Object index="5" type="Calc">
-        <Calculation><![CDATA[]]></Calculation>
-      </Object>
-      <Object index="6" type="Calc">
-        <Calculation><![CDATA[]]></Calculation>
-      </Object>
-      <Object index="7" type="Calc">
-        <Calculation><![CDATA[]]></Calculation>
-      </Object>
-      <Object index="8" type="Calc">
-        <Calculation><![CDATA[]]></Calculation>
-      </Object>
-      <Object index="9" type="Calc">
-        <Calculation><![CDATA[]]></Calculation>
-      </Object>
-    </ParameterValues>
-  </Step>
-  <Step enable="True" id="141" name="Set Variable">
-    <Value>
-      <Calculation><![CDATA[MBS("Clipboard.GetText"; "")]]></Calculation>
-    </Value>
-    <Repetition>
-      <Calculation><![CDATA[1]]></Calculation>
-    </Repetition>
-    <Name>$fmfn</Name>
-  </Step>
-  <Step enable="True" id="1" name="Perform Script">
-    <Calculation><![CDATA[$filename & ¶ & 
+      </Value>
+      <Repetition>
+        <Calculation><![CDATA[1]]></Calculation>
+      </Repetition>
+      <Name>$script</Name>
+    </Step>
+    <Step enable="True" id="141" name="Set Variable">
+      <Value>
+        <Calculation><![CDATA[$scripts & $script & ¶]]></Calculation>
+      </Value>
+      <Repetition>
+        <Calculation><![CDATA[1]]></Calculation>
+      </Repetition>
+      <Name>$scripts</Name>
+    </Step>
+    <Step enable="True" id="141" name="Set Variable">
+      <Value>
+        <Calculation><![CDATA[RightValues ( $scriptrefs ; ValueCount ( $scriptrefs ) - 1 )]]></Calculation>
+      </Value>
+      <Repetition>
+        <Calculation><![CDATA[1]]></Calculation>
+      </Repetition>
+      <Name>$scriptrefs</Name>
+    </Step>
+    <Step enable="True" id="89" name="# (comment)"/>
+    <Step enable="True" id="89" name="# (comment)">
+      <Text>Commit Script Text</Text>
+    </Step>
+    <Step enable="True" id="141" name="Set Variable">
+      <Value>
+        <Calculation><![CDATA[$script & "." & Main::Script extension]]></Calculation>
+      </Value>
+      <Repetition>
+        <Calculation><![CDATA[1]]></Calculation>
+      </Repetition>
+      <Name>$filename</Name>
+    </Step>
+    <Step index="2" Source="MBSP" enable="True" id="186" name="MBS">
+      <PluginStep>
+        <Parameter ShowInLine="true" Label="Destination" Type="target"/>
+        <Parameter ID="0" Label="Function" ShowInline="true" DataType="text" Type="calc"/>
+        <Parameter ID="1" Label="P1" ShowInline="true" DataType="text" Type="calc"/>
+        <Parameter ID="2" Label="P2" ShowInline="true" DataType="text" Type="calc"/>
+        <Parameter ID="3" Label="P3" ShowInline="true" DataType="text" Type="calc"/>
+        <Parameter ID="4" Label="P4" ShowInline="true" DataType="text" Type="calc"/>
+        <Parameter ID="5" Label="P5" ShowInline="false" DataType="text" Type="calc"/>
+        <Parameter ID="6" Label="P6" ShowInline="false" DataType="text" Type="calc"/>
+        <Parameter ID="7" Label="P7" ShowInline="false" DataType="text" Type="calc"/>
+        <Parameter ID="8" Label="P8" ShowInline="false" DataType="text" Type="calc"/>
+        <Parameter ID="9" Label="P9" ShowInline="false" DataType="text" Type="calc"/>
+      </PluginStep>
+      <SelectAll state="True"/>
+      <Field/>
+      <ParameterValues>
+        <Object index="0" type="Calc">
+          <Calculation><![CDATA["ScriptWorkspace.OpenScript"]]></Calculation>
+        </Object>
+        <Object index="1" type="Calc">
+          <Calculation><![CDATA[$script]]></Calculation>
+        </Object>
+        <Object index="2" type="Calc">
+          <Calculation><![CDATA[]]></Calculation>
+        </Object>
+        <Object index="3" type="Calc">
+          <Calculation><![CDATA[]]></Calculation>
+        </Object>
+        <Object index="4" type="Calc">
+          <Calculation><![CDATA[]]></Calculation>
+        </Object>
+        <Object index="5" type="Calc">
+          <Calculation><![CDATA[]]></Calculation>
+        </Object>
+        <Object index="6" type="Calc">
+          <Calculation><![CDATA[]]></Calculation>
+        </Object>
+        <Object index="7" type="Calc">
+          <Calculation><![CDATA[]]></Calculation>
+        </Object>
+        <Object index="8" type="Calc">
+          <Calculation><![CDATA[]]></Calculation>
+        </Object>
+        <Object index="9" type="Calc">
+          <Calculation><![CDATA[]]></Calculation>
+        </Object>
+      </ParameterValues>
+    </Step>
+    <Step index="2" Source="MBSP" enable="True" id="186" name="MBS">
+      <PluginStep>
+        <Parameter ShowInLine="true" Label="Destination" Type="target"/>
+        <Parameter ID="0" Label="Function" ShowInline="true" DataType="text" Type="calc"/>
+        <Parameter ID="1" Label="P1" ShowInline="true" DataType="text" Type="calc"/>
+        <Parameter ID="2" Label="P2" ShowInline="true" DataType="text" Type="calc"/>
+        <Parameter ID="3" Label="P3" ShowInline="true" DataType="text" Type="calc"/>
+        <Parameter ID="4" Label="P4" ShowInline="true" DataType="text" Type="calc"/>
+        <Parameter ID="5" Label="P5" ShowInline="false" DataType="text" Type="calc"/>
+        <Parameter ID="6" Label="P6" ShowInline="false" DataType="text" Type="calc"/>
+        <Parameter ID="7" Label="P7" ShowInline="false" DataType="text" Type="calc"/>
+        <Parameter ID="8" Label="P8" ShowInline="false" DataType="text" Type="calc"/>
+        <Parameter ID="9" Label="P9" ShowInline="false" DataType="text" Type="calc"/>
+      </PluginStep>
+      <SelectAll state="True"/>
+      <Field/>
+      <ParameterValues>
+        <Object index="0" type="Calc">
+          <Calculation><![CDATA["ScriptWorkspace.CopyScriptText"]]></Calculation>
+        </Object>
+        <Object index="1" type="Calc">
+          <Calculation><![CDATA[]]></Calculation>
+        </Object>
+        <Object index="2" type="Calc">
+          <Calculation><![CDATA[]]></Calculation>
+        </Object>
+        <Object index="3" type="Calc">
+          <Calculation><![CDATA[]]></Calculation>
+        </Object>
+        <Object index="4" type="Calc">
+          <Calculation><![CDATA[]]></Calculation>
+        </Object>
+        <Object index="5" type="Calc">
+          <Calculation><![CDATA[]]></Calculation>
+        </Object>
+        <Object index="6" type="Calc">
+          <Calculation><![CDATA[]]></Calculation>
+        </Object>
+        <Object index="7" type="Calc">
+          <Calculation><![CDATA[]]></Calculation>
+        </Object>
+        <Object index="8" type="Calc">
+          <Calculation><![CDATA[]]></Calculation>
+        </Object>
+        <Object index="9" type="Calc">
+          <Calculation><![CDATA[]]></Calculation>
+        </Object>
+      </ParameterValues>
+    </Step>
+    <Step enable="True" id="141" name="Set Variable">
+      <Value>
+        <Calculation><![CDATA[MBS("Clipboard.GetText"; "")]]></Calculation>
+      </Value>
+      <Repetition>
+        <Calculation><![CDATA[1]]></Calculation>
+      </Repetition>
+      <Name>$fmfn</Name>
+    </Step>
+    <Step enable="True" id="1" name="Perform Script">
+      <Calculation><![CDATA[$filename & ¶ & 
 $scriptsDir]]></Calculation>
-    <Script id="3" name="Find File"/>
-  </Step>
-  <Step enable="True" id="141" name="Set Variable">
-    <Value>
-      <Calculation><![CDATA[If ( IsEmpty ( Get ( ScriptResult ) ) ; 
+      <Script id="3" name="Find File"/>
+    </Step>
+    <Step enable="True" id="141" name="Set Variable">
+      <Value>
+        <Calculation><![CDATA[If ( IsEmpty ( Get ( ScriptResult ) ) ; 
   Main::Project path & "/" & Main::Scripts path & "/tmp/"
 ;
   Let ( [
       path = Get ( ScriptResult ) ;
 
       // Find the last slash to remove the filename
-      lastSlash = Position ( path ; "/" ; Length ( path ) ; -1 ) ;
-    
-      // Get directory path only
-      dir = Left ( path ; lastSlash )
+      lastSlash = Position ( path ; "/" ; Length ( path ) ; -1 )
   ] ; 
-    dir
+    Left ( path ; lastSlash )
   )
 )]]></Calculation>
-    </Value>
-    <Repetition>
-      <Calculation><![CDATA[1]]></Calculation>
-    </Repetition>
-    <Name>$dir</Name>
-  </Step>
-  <Step enable="True" id="141" name="Set Variable">
-    <Value>
-      <Calculation><![CDATA[$dir & $filename]]></Calculation>
-    </Value>
-    <Repetition>
-      <Calculation><![CDATA[1]]></Calculation>
-    </Repetition>
-    <Name>$path</Name>
-  </Step>
-  <Step enable="True" id="141" name="Set Variable">
-    <Value>
-      <Calculation><![CDATA[ConvertToFileMakerPath ( $path ; 1 )]]></Calculation>
-    </Value>
-    <Repetition>
-      <Calculation><![CDATA[1]]></Calculation>
-    </Repetition>
-    <Name>$path.fm</Name>
-  </Step>
-  <Step enable="True" id="86" name="Set Error Capture">
-    <Set state="True"/>
-  </Step>
-  <Step enable="True" id="197" name="Delete File">
-    <UniversalPathList>$path.fm</UniversalPathList>
-  </Step>
-  <Step enable="True" id="86" name="Set Error Capture">
-    <Set state="False"/>
-  </Step>
-  <Step enable="True" id="141" name="Set Variable">
-    <Value>
-      <Calculation><![CDATA[MBS("Files.CreateDirectory"; $dir)]]></Calculation>
-    </Value>
-    <Repetition>
-      <Calculation><![CDATA[1]]></Calculation>
-    </Repetition>
-    <Name>$r</Name>
-  </Step>
-  <Step enable="True" id="141" name="Set Variable">
-    <Value>
-      <Calculation><![CDATA[MBS("Text.WriteTextFile"; $fmfn; $path; "UTF-8")]]></Calculation>
-    </Value>
-    <Repetition>
-      <Calculation><![CDATA[1]]></Calculation>
-    </Repetition>
-    <Name>$export</Name>
-  </Step>
-  <Step enable="False" id="89" name="# (comment)">
-    <Text>FileMaker natively exports fields as UTF-16, which Git interprets as bytes, instead of text</Text>
-  </Step>
-  <Step enable="True" id="89" name="# (comment)"/>
-  <Step enable="True" id="89" name="# (comment)">
-    <Text>XML</Text>
-  </Step>
-  <Step enable="True" id="141" name="Set Variable">
-    <Value>
-      <Calculation><![CDATA[Get ( ScriptParameter ) = 1]]></Calculation>
-    </Value>
-    <Repetition>
-      <Calculation><![CDATA[1]]></Calculation>
-    </Repetition>
-    <Name>$createXML</Name>
-  </Step>
-  <Step enable="True" id="141" name="Set Variable">
-    <Value>
-      <Calculation><![CDATA[$script & ".xml"]]></Calculation>
-    </Value>
-    <Repetition>
-      <Calculation><![CDATA[1]]></Calculation>
-    </Repetition>
-    <Name>$filename</Name>
-  </Step>
-  <Step enable="True" id="141" name="Set Variable">
-    <Value>
-      <Calculation><![CDATA[$dir & $filename]]></Calculation>
-    </Value>
-    <Repetition>
-      <Calculation><![CDATA[1]]></Calculation>
-    </Repetition>
-    <Name>$path</Name>
-  </Step>
-  <Step enable="True" id="141" name="Set Variable">
-    <Value>
-      <Calculation><![CDATA[ConvertToFileMakerPath ( $path ; 1 )]]></Calculation>
-    </Value>
-    <Repetition>
-      <Calculation><![CDATA[1]]></Calculation>
-    </Repetition>
-    <Name>$path.fm</Name>
-  </Step>
-  <Step enable="True" id="86" name="Set Error Capture">
-    <Set state="True"/>
-  </Step>
-  <Step enable="True" id="197" name="Delete File">
-    <UniversalPathList>$path.fm</UniversalPathList>
-  </Step>
-  <Step enable="True" id="141" name="Set Variable">
-    <Value>
-      <Calculation><![CDATA[not Get ( LastError )]]></Calculation>
-    </Value>
-    <Repetition>
-      <Calculation><![CDATA[1]]></Calculation>
-    </Repetition>
-    <Name>$exists</Name>
-  </Step>
-  <Step enable="True" id="86" name="Set Error Capture">
-    <Set state="False"/>
-  </Step>
-  <Step enable="True" id="68" name="If">
-    <Calculation><![CDATA[$exists or $createXML]]></Calculation>
-  </Step>
-  <Step enable="True" id="89" name="# (comment)">
-    <Text>Commit XML</Text>
-  </Step>
-  <Step enable="True" id="141" name="Set Variable">
-    <Value>
-      <Calculation><![CDATA[MBS("Text.WriteTextFile"; MBS("XML.Format"; $xml); $path; "UTF-8")]]></Calculation>
-    </Value>
-    <Repetition>
-      <Calculation><![CDATA[1]]></Calculation>
-    </Repetition>
-    <Name>$export</Name>
-  </Step>
-  <Step enable="True" id="70" name="End If"/>
-  <Step enable="True" id="89" name="# (comment)"/>
-  <Step enable="True" id="73" name="End Loop"/>
-  <Step enable="True" id="141" name="Set Variable">
-    <Value>
-      <Calculation><![CDATA[MBS("XML.ReleaseAll")]]></Calculation>
-    </Value>
-    <Repetition>
-      <Calculation><![CDATA[1]]></Calculation>
-    </Repetition>
-    <Name>$release</Name>
-  </Step>
-  <Step enable="True" id="87" name="Show Custom Dialog">
-    <Title>
-      <Calculation><![CDATA["Scripts committed"]]></Calculation>
-    </Title>
-    <Message>
-      <Calculation><![CDATA[Substitute ( Left ( $scripts ; Length ( $scripts ) - 1 ) ; ¶ ; ", " )]]></Calculation>
-    </Message>
-    <Buttons>
-      <Button CommitState="True">
-        <Calculation><![CDATA["OK"]]></Calculation>
-      </Button>
-      <Button CommitState="False"/>
-      <Button CommitState="False"/>
-    </Buttons>
-  </Step>
-  <Step enable="True" id="88" name="Open Script Workspace"/>
-  <Step enable="True" id="89" name="# (comment)"/>
-  <Step enable="False" id="89" name="# (comment)">
-    <Text>© 2025 Dean Ayalon &lt;dev@deanayalon.com&gt;&#13;Licensed under the Apache License, Version 2.0&#13;You may use, modify, and distribute this file under the terms of that license.&#13;Please retain this notice and give appropriate credit.&#13;&#13;Source: https://github.com/deanayalon/fm-script-commit&#13;Contact me at the above email for any questions or support.</Text>
-  </Step>
-</Script>
+      </Value>
+      <Repetition>
+        <Calculation><![CDATA[1]]></Calculation>
+      </Repetition>
+      <Name>$dir</Name>
+    </Step>
+    <Step enable="True" id="141" name="Set Variable">
+      <Value>
+        <Calculation><![CDATA[$dir & $filename]]></Calculation>
+      </Value>
+      <Repetition>
+        <Calculation><![CDATA[1]]></Calculation>
+      </Repetition>
+      <Name>$path</Name>
+    </Step>
+    <Step enable="True" id="141" name="Set Variable">
+      <Value>
+        <Calculation><![CDATA[ConvertToFileMakerPath ( $path ; 1 )]]></Calculation>
+      </Value>
+      <Repetition>
+        <Calculation><![CDATA[1]]></Calculation>
+      </Repetition>
+      <Name>$path.fm</Name>
+    </Step>
+    <Step enable="True" id="86" name="Set Error Capture">
+      <Set state="True"/>
+    </Step>
+    <Step enable="True" id="197" name="Delete File">
+      <UniversalPathList>$path.fm</UniversalPathList>
+    </Step>
+    <Step enable="True" id="86" name="Set Error Capture">
+      <Set state="False"/>
+    </Step>
+    <Step enable="True" id="141" name="Set Variable">
+      <Value>
+        <Calculation><![CDATA[MBS("Files.CreateDirectory"; $dir)]]></Calculation>
+      </Value>
+      <Repetition>
+        <Calculation><![CDATA[1]]></Calculation>
+      </Repetition>
+      <Name>$r</Name>
+    </Step>
+    <Step enable="True" id="141" name="Set Variable">
+      <Value>
+        <Calculation><![CDATA[MBS("Text.WriteTextFile"; $fmfn; $path; "UTF-8")]]></Calculation>
+      </Value>
+      <Repetition>
+        <Calculation><![CDATA[1]]></Calculation>
+      </Repetition>
+      <Name>$export</Name>
+    </Step>
+    <Step enable="False" id="89" name="# (comment)">
+      <Text>FileMaker natively exports fields as UTF-16, which Git interprets as bytes, instead of text</Text>
+    </Step>
+    <Step enable="True" id="89" name="# (comment)"/>
+    <Step enable="True" id="89" name="# (comment)">
+      <Text>XML</Text>
+    </Step>
+    <Step enable="True" id="141" name="Set Variable">
+      <Value>
+        <Calculation><![CDATA[Get ( ScriptParameter ) = 1]]></Calculation>
+      </Value>
+      <Repetition>
+        <Calculation><![CDATA[1]]></Calculation>
+      </Repetition>
+      <Name>$createXML</Name>
+    </Step>
+    <Step enable="True" id="141" name="Set Variable">
+      <Value>
+        <Calculation><![CDATA[$script & ".xml"]]></Calculation>
+      </Value>
+      <Repetition>
+        <Calculation><![CDATA[1]]></Calculation>
+      </Repetition>
+      <Name>$filename</Name>
+    </Step>
+    <Step enable="True" id="141" name="Set Variable">
+      <Value>
+        <Calculation><![CDATA[$dir & $filename]]></Calculation>
+      </Value>
+      <Repetition>
+        <Calculation><![CDATA[1]]></Calculation>
+      </Repetition>
+      <Name>$path</Name>
+    </Step>
+    <Step enable="True" id="141" name="Set Variable">
+      <Value>
+        <Calculation><![CDATA[ConvertToFileMakerPath ( $path ; 1 )]]></Calculation>
+      </Value>
+      <Repetition>
+        <Calculation><![CDATA[1]]></Calculation>
+      </Repetition>
+      <Name>$path.fm</Name>
+    </Step>
+    <Step enable="True" id="86" name="Set Error Capture">
+      <Set state="True"/>
+    </Step>
+    <Step enable="True" id="197" name="Delete File">
+      <UniversalPathList>$path.fm</UniversalPathList>
+    </Step>
+    <Step enable="True" id="141" name="Set Variable">
+      <Value>
+        <Calculation><![CDATA[not Get ( LastError )]]></Calculation>
+      </Value>
+      <Repetition>
+        <Calculation><![CDATA[1]]></Calculation>
+      </Repetition>
+      <Name>$exists</Name>
+    </Step>
+    <Step enable="True" id="86" name="Set Error Capture">
+      <Set state="False"/>
+    </Step>
+    <Step enable="True" id="68" name="If">
+      <Calculation><![CDATA[$exists or $createXML]]></Calculation>
+    </Step>
+    <Step enable="True" id="89" name="# (comment)">
+      <Text>Commit XML</Text>
+    </Step>
+    <Step enable="True" id="141" name="Set Variable">
+      <Value>
+        <Calculation><![CDATA[MBS("Text.WriteTextFile"; MBS("XML.Format"; $xml); $path; "UTF-8")]]></Calculation>
+      </Value>
+      <Repetition>
+        <Calculation><![CDATA[1]]></Calculation>
+      </Repetition>
+      <Name>$export</Name>
+    </Step>
+    <Step enable="True" id="70" name="End If"/>
+    <Step enable="True" id="89" name="# (comment)"/>
+    <Step enable="True" id="73" name="End Loop"/>
+    <Step enable="True" id="141" name="Set Variable">
+      <Value>
+        <Calculation><![CDATA[MBS("XML.ReleaseAll")]]></Calculation>
+      </Value>
+      <Repetition>
+        <Calculation><![CDATA[1]]></Calculation>
+      </Repetition>
+      <Name>$release</Name>
+    </Step>
+    <Step enable="True" id="87" name="Show Custom Dialog">
+      <Title>
+        <Calculation><![CDATA["Scripts committed"]]></Calculation>
+      </Title>
+      <Message>
+        <Calculation><![CDATA[Substitute ( Left ( $scripts ; Length ( $scripts ) - 1 ) ; ¶ ; ", " )]]></Calculation>
+      </Message>
+      <Buttons>
+        <Button CommitState="True">
+          <Calculation><![CDATA["OK"]]></Calculation>
+        </Button>
+        <Button CommitState="False"/>
+        <Button CommitState="False"/>
+      </Buttons>
+    </Step>
+    <Step enable="True" id="88" name="Open Script Workspace"/>
+    <Step enable="True" id="89" name="# (comment)"/>
+    <Step enable="False" id="89" name="# (comment)">
+      <Text>© 2025 Dean Ayalon &lt;dev@deanayalon.com&gt;&#13;Licensed under the Apache License, Version 2.0&#13;You may use, modify, and distribute this file under the terms of that license.&#13;Please retain this notice and give appropriate credit.&#13;&#13;Source: https://github.com/deanayalon/fm-script-commit&#13;Contact me at the above email for any questions or support.</Text>
+    </Step>
+  </Script>
+</fmxmlsnippet>
