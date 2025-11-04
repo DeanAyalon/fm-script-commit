@@ -42,6 +42,7 @@ Loop [ Flush: Always ]
 	Set Error Capture [ On ]
 	Delete File [ Target file: “$path.fm” ]
 	Set Error Capture [ Off ]
+	Set Variable [ $r ; Value: MBS("Files.CreateDirectory"; $dir) ]
 	Set Variable [ $export ; Value: MBS("Text.WriteTextFile"; $fmfn; $path; "UTF-8") ]
 	// # FileMaker natively exports fields as UTF-16, which Git interprets as bytes, instead of text
 	# 

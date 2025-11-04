@@ -15,3 +15,6 @@ Add . before file extension
 
 ## v0.2.2
 Export content using `MBS(Text.WriteTextFile)` (UTF-8) instead of native `Export Field Content` (UTF-16), so Git understands those are text files
+
+## v0.2.3
+Patch tmp directory creation
