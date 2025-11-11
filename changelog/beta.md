@@ -21,3 +21,7 @@ Patch tmp directory creation
 
 ## v0.2.4
 Fix typo in `MAIN::Script extension`, export script XML within `<fmxmlsnippet>` tags for simpler copy-paste into FileMaker
+
+## v0.2.5
+Alert if trying to save clone from a hosted solution
+- `MAIN::Version` added description

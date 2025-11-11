@@ -1,5 +1,7 @@
-# Hotkeys in file script-commit
+# Hotkeys in file script-commit (Dean's Development FMS)
 
+Perform Script [ Specified: From list ; “MBS Registration” ; Parameter:    ]
+# 
 # For convenience - hotkeys to commit scripts and clone
 Set Variable [ $commitScript ; Value: MBS("HotKey.Register"; "S"; "command-option"; 0; Get ( FileName ) & ".fmp12"; "Commit Script"; 1) ]
 // # cmd-alt-S: Commit Script

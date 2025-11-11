@@ -13,7 +13,7 @@
     </Step>
     <Step enable="True" id="89" name="# (comment)"/>
     <Step enable="True" id="1" name="Perform Script">
-      <Script id="8" name="MBS Registration"/>
+      <Script id="11" name="MBS Registration"/>
     </Step>
     <Step enable="True" id="68" name="If">
       <Calculation><![CDATA[Get ( ScriptResult ) ≠ 1]]></Calculation>
