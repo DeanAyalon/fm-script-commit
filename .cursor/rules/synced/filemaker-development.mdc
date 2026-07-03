@@ -1,0 +1,156 @@
+---
+description: FileMaker development workflow — what AI may edit vs deliver as paste specs
+alwaysApply: true
+---
+
+# FileMaker development
+
+This repo tracks a FileMaker solution. Schema, layouts, and live scripts live in `.fmp12`; git mirrors scripts, schema (per-table `fmxmlsnippet` exports under `code/schema/`), and custom functions for review.
+
+## File index
+
+| Path                           | Format                            | AI may edit repo file?                         |
+|--------------------------------|-----------------------------------|------------------------------------------------|
+| `code/scripts/**/*.fmfn`       | Human-readable script export      | **No** — committed by fmp12 during development |
+| `code/scripts/**/*.xml`        | Full-script `fmxmlsnippet` export | **No** — committed by fmp12 during development |
+| `code/schema/**/*.xml`         | Per-table `fmxmlsnippet` export   | **No** — committed by fmp12 during development |
+| `code/custom-functions/*.calc` | FileMaker calculation language    | **Yes** — user copy-pastes into FileMaker      |
+| `changelog/v2/*.md`            | Developer version log             | **TODO only** — developer writes all else      |
+| `*.fmp12`                      | Binary solution                   | **Never read** and **never edit**!             |
+
+## Hard rules
+
+- **Never edit** `.fmp12` or `.fmfn` files.
+- **Never read** `.fmp12` files (binary; content is not usable).
+- **Never edit** committed `code/scripts/**/*.xml` or `code/schema/**/*.xml` files. Script and schema changes go in deliverable instructions (below).
+- **Never edit** the changelog except `### TODO` items. Version headings and body text are developer-only.
+- **Do not invent** FileMaker object names (fields, value lists, table occurrences, layouts, script ids, object names, etc). Ask the user for correct existing names/ids when needed. Also do not use placeholders like `FIELD_ID` - ASK ME, or state that you cannot create the `fmxmlsnippet` or whatever you're working on.
+- For implementation, write a markdown deliverable under `changelog/v2/deliverables/` with step-by-step paste specs for the developer. FileMaker cannot be edited by AI.
+
+## Changelog — read-only for AI
+
+The changelog is written by the developer in real time while modifying the `.fmp12` file. **Never edit changelog files** except to add or update `## TODO` items under the current uncommitted version section.
+
+**Never:**
+- Add, rename, or edit `## v2.x-y` version headings
+- Write changelog body text, bullet lists, or shipped notes
+- “Complete”, “update”, or “sync” the changelog from a plan or deliverable
+- Invent the next version number (`v2.5-7`, etc.) when an uncommitted `## v2.x-y` already exists
+
+**Only allowed changelog edit:** `## TODO` lines (and their checklist items) under the developer’s current uncommitted version section.
+
+If no uncommitted `## v2.x-y` heading exists, **ask the developer** for the version tag — do not create the heading yourself.
+
+## Version tag and deliverable filename
+
+**The changelog is the only source of truth for the version tag. Not the plan. Not the next sequential number. Not a descriptive slug.**
+
+### How to find the version tag
+
+1. Run `git diff HEAD -- changelog/v2/*.md` (or read the file if there is no diff)
+2. In that diff, find the `## v2.x-y` heading that was **added** and is not yet committed — e.g. `## v2.5-6 - Quote Initiator`
+3. The version tag is **`v2.5-6`** (the `v2.x-y` part of that heading, without the title after `-`)
+4. The deliverable filename is **`changelog/v2/deliverables/v2.5-6.md`** — always `{version-tag}.md`, never a descriptive slug like `quote-initiator-field.md`
+5. If the diff shows **any** uncommitted `## v2.x-y` heading, use **that** tag — never add another
+
+### One deliverable per changelog section
+
+- Use the **uncommitted** `## v2.x-y` heading — that section’s deliverable is `{version-tag}.md`
+- A trailing `## TODO` in the **same uncommitted diff** is still that tag (e.g. TODO under `v2.5-6` → `v2.5-6.md`)
+- A plan may span **multiple** version slices — the developer cuts a slice by **committing**, then adding a **new** `## v2.x-y` line in the changelog; the next uncommitted heading is the next tag
+- Do not split **one** changelog section across multiple deliverable files
+
+### What NOT to do
+
+- **Do not** read `.cursor/plans/` to pick the version tag — plans may say “future slice” or “TBD”; ignore that for naming
+- **Do not** invent or add version headings — the developer creates them when starting a new slice
+- **Do not** add a second uncommitted `## v2.x-y` when one already exists in the working tree
+
+### If no tag is evident
+
+If `git diff HEAD -- changelog/v2/*.md` shows no new `## v2.x-y` heading, ask the developer for the version tag before naming the deliverable. 
+
+## Documentation vs plan
+
+When a changelog entry or script documentation file **differs from** a `.cursor/plans/` file, treat the **changelog** and script documentation as authoritative for what shipped and **which version tag** applies. The developer made conscious alterations during implementation; **do not** rewrite the changelog to match the plan. Instead, update the plan and deliverable files to reflect what was actually shipped.
+
+## Deliverable format for script changes
+
+Do not patch `.fmfn` / `.xml` in git. Instead, in the deliverable markdown show **both**:
+
+1. **`.fmfn` view** — use fenced `diff` blocks so additions/removals are clear, add disabled comment line indicating the first step number in the snippet (e.g. `// # Line 7:`)
+2. **FMXML copy snippet** — standalone `fmxmlsnippet` blocks the user can paste/import.
+
+**Paste granularity:** a script step is the smallest paste target. Snippets contain complete `<Step>` elements only — never fragments inside a step (e.g. individual `ExportEntry` rows within `Export Records`). To change step internals, deliver the **whole step** for the developer to replace.
+
+**Adjacent steps:** if two or more script steps are consecutive in the final script, put them in **one** `fmxmlsnippet` block (multiple `<Step>` elements under a single wrapper). Do not split adjacent steps into separate snippets. Use a separate `fmxmlsnippet` only when pasted steps are not next to each other in the script.
+
+This differs from repo `.xml` files, which wrap the entire `<Script>` element.
+
+### Example: Add two steps to copy dates to a variable
+
+Edit the `Example` script:
+```diff
+  // # Line 7:
+  If [ $sp = "Send" ]
+-   Set Variable [ $dates ; Value: MAIN::Session » Browse Date & "..." & MAIN::Session » End Date ]
++   Set Variable [ $start ; Value: MAIN::Session » Browse Date ]
++   Set Variable [ $end ; Value: MAIN::Session » End Date ]
+    Perform Script [ … ]
+```
+
+Paste the following `fmxmlsnippet`, replacing the existing `Set Variable[$dates]` step:
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<fmxmlsnippet type="FMObjectList">
+  <Step enable="True" id="76" name="Set Field">
+    <Calculation><![CDATA[$$start]]></Calculation>
+    <Field table="MAIN" id="21" name="Session » Browse Date"/>
+  </Step>
+  <Step enable="True" id="76" name="Set Field">
+    <Calculation><![CDATA[$$end]]></Calculation>
+    <Field table="MAIN" id="231" name="Session » End Date"/>
+  </Step>
+</fmxmlsnippet>
+```
+
+## Deliverable format for schema changes
+
+Do not patch `code/schema/**/*.xml` in git. Schema changes go in the deliverable only.
+
+**FMXML wrapper:** enclose paste snippets in the same `fmxmlsnippet` wrapper used for script steps:
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<fmxmlsnippet type="FMObjectList">
+  …
+</fmxmlsnippet>
+```
+
+**Paste granularity:** a field is the smallest paste target. Snippets contain complete `<Field>` elements only — never fragments inside a field definition.
+
+**New fields:** deliver a full `<Field>` element inside an `fmxmlsnippet` block for the developer to paste/import.
+
+**Existing fields:** never deliver a full `<Field>` for copy-paste when modifying something that already exists. Instead:
+- Describe what to change (type, storage, options, etc.), or
+- Paste only the modified calculation (or other changed fragment) for the developer to apply in FileMaker
+
+Repo `code/schema/**/*.xml` files wrap the entire table; deliverable snippets contain only the `<Field>` element(s) being added, wrapped in the same `fmxmlsnippet` wrapper.
+
+## Deliverable format for calculations
+
+- **Custom functions** (`code/custom-functions/*.calc`): may edit the `.calc` file directly and/or include the formula in the deliverable.
+- **Schema calcs** (fields on tables): follow schema deliverable rules above — new field: full `<Field>` snippet; existing field: modified calculation or change instructions only.
+
+## Division of labour
+
+**User** — inside `.fmp12` and git exports:
+- Fields, relationships, table occurrences, value lists
+- Layouts, export order, print setup
+- Commit `.fmfn` / `.xml` script exports and `code/schema` table exports to git
+- Commit `.fmp12` clone to lfs submodule
+
+**AI** — in git only:
+- Edit `code/custom-functions/*.calc`
+- `## TODO` items in the changelog (only)
+- Deliverable markdown (field, relationship, calc, and script paste specs)
