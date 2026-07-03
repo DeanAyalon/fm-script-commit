@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fmxmlsnippet type="FMObjectList">
+  <BaseTable name="Main">
+    <Field id="1" dataType="Text" fieldType="Normal" name="PrimaryKey">
+      <Comment>Unique identifier of each record in this table</Comment>
+      <AutoEnter allowEditing="False" overwriteExistingValue="True" alwaysEvaluate="False" constant="False" furigana="False" lookup="False" calculation="True">
+        <ConstantData/>
+        <Calculation table="Main"><![CDATA[Get( UUID )]]></Calculation>
+      </AutoEnter>
+      <Validation messageCalc="False" message="False" maxLength="False" valuelist="False" calculation="False" alwaysValidateCalculation="False" type="OnlyDuringDataEntry">
+        <NotEmpty value="True"/>
+        <Unique value="True"/>
+        <Existing value="False"/>
+        <StrictValidation value="True"/>
+      </Validation>
+      <Storage autoIndex="True" index="Minimal" indexLanguage="Unicode_Raw" global="False" maxRepetition="1"/>
+    </Field>
+    <Field id="2" dataType="TimeStamp" fieldType="Normal" name="CreationTimestamp">
+      <Comment>Date and time each record was created</Comment>
+      <AutoEnter allowEditing="False" value="CreationTimeStamp" constant="False" furigana="False" lookup="False" calculation="False">
+        <ConstantData/>
+      </AutoEnter>
+      <Validation messageCalc="False" message="False" maxLength="False" valuelist="False" calculation="False" alwaysValidateCalculation="False" type="OnlyDuringDataEntry">
+        <StrictDataType value="FourDigitYear"/>
+        <NotEmpty value="True"/>
+        <Unique value="False"/>
+        <Existing value="False"/>
+        <StrictValidation value="True"/>
+      </Validation>
+      <Storage autoIndex="True" index="None" indexLanguage="English" global="False" maxRepetition="1"/>
+    </Field>
+    <Field id="3" dataType="Text" fieldType="Normal" name="CreatedBy">
+      <Comment>Account name of the user who created each record</Comment>
+      <AutoEnter allowEditing="False" value="CreationAccountName" constant="False" furigana="False" lookup="False" calculation="False">
+        <ConstantData/>
+      </AutoEnter>
+      <Validation messageCalc="False" message="False" maxLength="False" valuelist="False" calculation="False" alwaysValidateCalculation="False" type="OnlyDuringDataEntry">
+        <NotEmpty value="True"/>
+        <Unique value="False"/>
+        <Existing value="False"/>
+        <StrictValidation value="True"/>
+      </Validation>
+      <Storage autoIndex="True" index="None" indexLanguage="English" global="False" maxRepetition="1"/>
+    </Field>
+    <Field id="4" dataType="TimeStamp" fieldType="Normal" name="ModificationTimestamp">
+      <Comment>Date and time each record was last modified</Comment>
+      <AutoEnter allowEditing="False" value="ModificationTimeStamp" constant="False" furigana="False" lookup="False" calculation="False">
+        <ConstantData/>
+      </AutoEnter>
+      <Validation messageCalc="False" message="False" maxLength="False" valuelist="False" calculation="False" alwaysValidateCalculation="False" type="OnlyDuringDataEntry">
+        <StrictDataType value="FourDigitYear"/>
+        <NotEmpty value="True"/>
+        <Unique value="False"/>
+        <Existing value="False"/>
+        <StrictValidation value="True"/>
+      </Validation>
+      <Storage autoIndex="True" index="None" indexLanguage="English" global="False" maxRepetition="1"/>
+    </Field>
+    <Field id="5" dataType="Text" fieldType="Normal" name="ModifiedBy">
+      <Comment>Account name of the user who last modified each record</Comment>
+      <AutoEnter allowEditing="False" value="ModificationAccountName" constant="False" furigana="False" lookup="False" calculation="False">
+        <ConstantData/>
+      </AutoEnter>
+      <Validation messageCalc="False" message="False" maxLength="False" valuelist="False" calculation="False" alwaysValidateCalculation="False" type="OnlyDuringDataEntry">
+        <NotEmpty value="True"/>
+        <Unique value="False"/>
+        <Existing value="False"/>
+        <StrictValidation value="True"/>
+      </Validation>
+      <Storage autoIndex="True" index="None" indexLanguage="English" global="False" maxRepetition="1"/>
+    </Field>
+    <Field id="9" dataType="Text" fieldType="Calculated" name="Version">
+      <Calculation table="Main"><![CDATA["Beta 0.2.5"]]></Calculation>
+      <Comment>Global static calculations do not update automatically on hosted solutions, if you change the calculation, you need to restart the app for it to take effect, relogin does not work</Comment>
+      <AutoEnter alwaysEvaluate="False"/>
+      <Storage indexLanguage="English" global="True" maxRepetition="1"/>
+    </Field>
+    <Field id="8" dataType="Text" fieldType="Normal" name="Project path">
+      <Comment/>
+      <AutoEnter allowEditing="True" constant="False" furigana="False" lookup="False" calculation="False">
+        <ConstantData/>
+      </AutoEnter>
+      <Validation messageCalc="False" message="False" maxLength="False" valuelist="False" calculation="False" alwaysValidateCalculation="False" type="OnlyDuringDataEntry">
+        <NotEmpty value="False"/>
+        <Unique value="False"/>
+        <Existing value="False"/>
+        <StrictValidation value="False"/>
+      </Validation>
+      <Storage autoIndex="True" index="None" indexLanguage="English" global="False" maxRepetition="1"/>
+    </Field>
+    <Field id="7" dataType="Text" fieldType="Normal" name="Clone path">
+      <Comment/>
+      <AutoEnter allowEditing="True" constant="False" furigana="False" lookup="False" calculation="False">
+        <ConstantData/>
+      </AutoEnter>
+      <Validation messageCalc="False" message="False" maxLength="False" valuelist="False" calculation="False" alwaysValidateCalculation="False" type="OnlyDuringDataEntry">
+        <NotEmpty value="False"/>
+        <Unique value="False"/>
+        <Existing value="False"/>
+        <StrictValidation value="False"/>
+      </Validation>
+      <Storage autoIndex="True" index="None" indexLanguage="English" global="False" maxRepetition="1"/>
+    </Field>
+    <Field id="6" dataType="Text" fieldType="Normal" name="Scripts path">
+      <Comment/>
+      <AutoEnter allowEditing="True" constant="False" furigana="False" lookup="False" calculation="False">
+        <ConstantData/>
+      </AutoEnter>
+      <Validation messageCalc="False" message="False" maxLength="False" valuelist="False" calculation="False" alwaysValidateCalculation="False" type="OnlyDuringDataEntry">
+        <NotEmpty value="False"/>
+        <Unique value="False"/>
+        <Existing value="False"/>
+        <StrictValidation value="False"/>
+      </Validation>
+      <Storage autoIndex="True" index="None" indexLanguage="English" global="False" maxRepetition="1"/>
+    </Field>
+    <Field id="12" dataType="Text" fieldType="Normal" name="Script extension">
+      <Comment/>
+      <AutoEnter allowEditing="True" constant="False" furigana="False" lookup="False" calculation="False">
+        <ConstantData/>
+      </AutoEnter>
+      <Validation messageCalc="False" message="False" maxLength="False" valuelist="False" calculation="False" alwaysValidateCalculation="False" type="OnlyDuringDataEntry">
+        <NotEmpty value="False"/>
+        <Unique value="False"/>
+        <Existing value="False"/>
+        <StrictValidation value="False"/>
+      </Validation>
+      <Storage autoIndex="True" index="None" indexLanguage="English" global="False" maxRepetition="1"/>
+    </Field>
+    <Field id="13" dataType="Text" fieldType="Normal" name="MBS Name">
+      <Comment/>
+      <AutoEnter allowEditing="True" constant="False" furigana="False" lookup="False" calculation="False">
+        <ConstantData/>
+      </AutoEnter>
+      <Validation messageCalc="False" message="False" maxLength="False" valuelist="False" calculation="False" alwaysValidateCalculation="False" type="OnlyDuringDataEntry">
+        <NotEmpty value="False"/>
+        <Unique value="False"/>
+        <Existing value="False"/>
+        <StrictValidation value="False"/>
+      </Validation>
+      <Storage autoIndex="True" index="None" indexLanguage="English" global="False" maxRepetition="1"/>
+    </Field>
+    <Field id="14" dataType="Text" fieldType="Normal" name="MBS Component">
+      <Comment/>
+      <AutoEnter allowEditing="True" constant="False" furigana="False" lookup="False" calculation="False">
+        <ConstantData/>
+      </AutoEnter>
+      <Validation messageCalc="False" message="False" maxLength="False" valuelist="False" calculation="False" alwaysValidateCalculation="False" type="OnlyDuringDataEntry">
+        <NotEmpty value="False"/>
+        <Unique value="False"/>
+        <Existing value="False"/>
+        <StrictValidation value="False"/>
+      </Validation>
+      <Storage autoIndex="True" index="None" indexLanguage="English" global="False" maxRepetition="1"/>
+    </Field>
+    <Field id="15" dataType="Text" fieldType="Normal" name="MBS License Type">
+      <Comment/>
+      <AutoEnter allowEditing="True" constant="False" furigana="False" lookup="False" calculation="False">
+        <ConstantData/>
+      </AutoEnter>
+      <Validation messageCalc="False" message="False" maxLength="False" valuelist="False" calculation="False" alwaysValidateCalculation="False" type="OnlyDuringDataEntry">
+        <NotEmpty value="False"/>
+        <Unique value="False"/>
+        <Existing value="False"/>
+        <StrictValidation value="False"/>
+      </Validation>
+      <Storage autoIndex="True" index="None" indexLanguage="English" global="False" maxRepetition="1"/>
+    </Field>
+    <Field id="16" dataType="Number" fieldType="Normal" name="MBS Expiration">
+      <Comment/>
+      <AutoEnter allowEditing="True" constant="False" furigana="False" lookup="False" calculation="False">
+        <ConstantData/>
+      </AutoEnter>
+      <Validation messageCalc="False" message="False" maxLength="False" valuelist="False" calculation="False" alwaysValidateCalculation="False" type="OnlyDuringDataEntry">
+        <NotEmpty value="False"/>
+        <Unique value="False"/>
+        <Existing value="False"/>
+        <StrictValidation value="False"/>
+      </Validation>
+      <Storage autoIndex="True" index="None" indexLanguage="English" global="False" maxRepetition="1"/>
+    </Field>
+    <Field id="17" dataType="Text" fieldType="Normal" name="MBS Serial">
+      <Comment/>
+      <AutoEnter allowEditing="True" constant="False" furigana="False" lookup="False" calculation="False">
+        <ConstantData/>
+      </AutoEnter>
+      <Validation messageCalc="False" message="False" maxLength="False" valuelist="False" calculation="False" alwaysValidateCalculation="False" type="OnlyDuringDataEntry">
+        <NotEmpty value="False"/>
+        <Unique value="False"/>
+        <Existing value="False"/>
+        <StrictValidation value="False"/>
+      </Validation>
+      <Storage autoIndex="True" index="None" indexLanguage="English" global="False" maxRepetition="1"/>
+    </Field>
+  </BaseTable>
+</fmxmlsnippet>
